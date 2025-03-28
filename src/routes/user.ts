@@ -14,6 +14,7 @@ router.get('/users', async (req: Request, res: Response) => {
     }
 });
 
+ 
 router.get('/users/:id', async (req: Request, res: Response) => {
     try {
         const user : UnitUser | null = await database.findOne(req.params.id);
