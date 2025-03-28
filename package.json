@@ -1,7 +1,7 @@
 {
   "name": "user-management-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "// GROUP C\r  Leader: YPIL, Cyril John T.\r  Members:\r     Doblas, Ken Harvey\r     Montemar, Jherick Isaiah\r     Wenceslao, Kent",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
