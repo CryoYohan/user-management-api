@@ -27,6 +27,7 @@ router.get('/users/:id', async (req: Request, res: Response) => {
     }
 });
 
+
 //deletion
 router.delete('/users/:id', async (req: Request, res: Response) => {
     try {
