@@ -1,35 +1,4 @@
 
-// creation
-router.post('/register', async (req: Request, res: Response) => {
-    try {
-
-        const { username, email, password } = req.body;
-        if (!username || !email || !password) {
-            res.status(StatusCodes.BAD_REQUEST).json({ message: "All fields are required" });
-            return;
-        }
-
-        if (await database.findByEmail(email)) {
-            res.status(StatusCodes.BAD_REQUEST).json({ message: "Email already in use" });
-            return;
-        }
-
-        const user = await database.create({ username, email, password });
-
-        if (!user) {
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: "Failed to create user" });
-            return;
-        }
-
-        res.status(StatusCodes.CREATED).json(user);
-    } catch (error) {
-        console.error("Error:", error);
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ 
-            message: "Server error", 
-            error: error instanceof Error ? error.message : JSON.stringify(error) 
-        });
-    }
-});
 
 //get all users
 router.get('/users', async (req: Request, res: Response) => {
