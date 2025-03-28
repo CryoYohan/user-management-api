@@ -27,6 +27,7 @@ router.get('/users/:id', async (req: Request, res: Response) => {
     }
 });
 
+
 //deletion
 router.delete('/users/:id', async (req: Request, res: Response) => {
     try {
@@ -42,3 +43,4 @@ router.delete('/users/:id', async (req: Request, res: Response) => {
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: "Server error", error });
     }
 });
+
