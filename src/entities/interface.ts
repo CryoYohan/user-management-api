@@ -10,5 +10,6 @@ export interface UserUpdate {
     title?: string;
     firstName?: string;
     lastName?: string;
+    role?: string;
     email?: string;
 }

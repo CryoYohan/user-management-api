@@ -1,7 +1,7 @@
 import { AppDataSource } from "../_helpers/db";
 import { Request, Response, NextFunction } from "express"
 import { User } from "../entities/User";
-import { UserType } from "../entities/interface";
+import { UserType, UserUpdate } from "../entities/interface";
 import Joi from "joi"
 import validateRequest from "../_middlewares/validate-request"
 
@@ -13,6 +13,10 @@ const getAll = async () => {
 }
 
 
+const getById = async (id: number) => {
+    return await userRepository.findOne({ where: { id } });
+}
+
 const create = async (params: UserType) => {
     if (await userRepository.findOne({ where: { email: params.email } })) {
         throw 'Email "' + params.email + '" is already taken';
@@ -20,6 +24,21 @@ const create = async (params: UserType) => {
     const user = userRepository.create(params); // Include all fields
     await userRepository.save(user);
 };
+
+const update = async (id: number, params: UserUpdate) => {
+
+    const user = await userRepository.findOne({ where: { id } });
+    if (!user) throw 'User not found';
+
+
+    if (params.email && params.email !== user.email) {
+        if (await userRepository.findOne({ where: { email: params.email } })) {
+            throw 'Email "' + params.email + '" is already taken';
+        }
+    }
+
+    await userRepository.update(id, { title: params.title, firstName: params.firstName, lastName: params.lastName, email: params.email, role: params.role });
+}
 
 
 const _delete = async (id: number) => {
@@ -55,5 +74,7 @@ const updateSchema = (req: Request, res: Response, next: NextFunction) => {
 export const userService = {
     getAll,
     create,
-    delete: _delete
+    delete: _delete,
+    getById,
+    update
 }
