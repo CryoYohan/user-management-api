@@ -4,6 +4,7 @@ import * as mysql from "mysql2/promise";
 import * as fs from "fs";
 import * as path from "path";
 
+
 // Load configuration from ormconfig.json
 const ormConfigPath = path.join(__dirname, "../../ormconfig.json");
 const rawConfig = fs.readFileSync(ormConfigPath, "utf8");
