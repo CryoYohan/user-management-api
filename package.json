@@ -2,9 +2,11 @@
   "name": "user-management-api",
   "version": "1.0.0",
   "description": "// GROUP C\r  Leader: YPIL, Cyril John T.\r  Members:\r     Doblas, Ken Harvey\r     Montemar, Jherick Isaiah\r     Wenceslao, Kent",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.ts",
+    "typeorm": "typeorm-ts-node-commonjs"
   },
   "repository": {
     "type": "git",
@@ -31,9 +33,11 @@
     "uuid": "^11.1.0"
   },
   "devDependencies": {
-    "@types/express": "file:types/dotenv@types/helmet@types/cors@types/http-status-codes@types/uuid@types",
+    "@types/express": "^4.17.17",
     "@types/node": "^22.13.14",
     "i": "^0.3.7",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
     "typescript": "^5.8.2"
   }
 }
