@@ -1,22 +1,16 @@
+import "reflect-metadata";
+import express, { Request, Response } from 'express';
 import { AppDataSource, ensureDbExists } from "./_helpers/db"
-import express from 'express'
-import { userRouter } from './users/users.routes'
+import { userRouter } from './routes/user';
+import dotenv from "dotenv";
 import errorHandler from './_middlewares/error-handler'
-import * as dotevnv from "dotenv"
 
-const app = express()
-dotevnv.config();
-
-if (!process.env.PORT) {
-  console.log(`No port value specified...`);
-}
-const PORT = parseInt(process.env.PORT as string, 10);
+const app = express();
+dotenv.config();
 
 //middlewares
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-
-
 
 //db initilization
 ensureDbExists()
@@ -27,6 +21,7 @@ ensureDbExists()
       })
       .catch(error => console.log(error))
   })
+
 
 // Routes
 app.use('/api/users', userRouter);
@@ -39,8 +34,7 @@ app.use((req, res, next) => {
 // Global error handler (must be last!)
 app.use(errorHandler);
 
-
-//start server
-app.listen(PORT, () => {
-  console.log(`Server started at http://localhost:${PORT}`)
-})
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
