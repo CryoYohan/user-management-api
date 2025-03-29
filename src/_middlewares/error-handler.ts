@@ -1,19 +1,12 @@
+// _middlewares/error-handler.ts
 import { Request, Response, NextFunction } from "express";
 
-const errorHandler = (err: unknown, req: Request, res: Response, next: NextFunction): void => {
-    if (typeof err === "string") {
-        const is404 = err.toLowerCase().endsWith("not found");
-        const statusCode = is404 ? 404 : 400;
-        res.status(statusCode).json({ message: err });
-        return;
-    }
-
-    if (err instanceof Error) {
-        res.status(500).json({ message: err.message });
-        return;
-    }
-
-    res.status(500).json({ message: "An unknown error occurred" });
-};
-
-export default errorHandler;
+export default function errorHandler(
+    err: any,
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
+    console.error(err); // Log the error
+    res.status(500).json({ message: err.message || "Internal Server Error" });
+}

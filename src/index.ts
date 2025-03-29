@@ -14,13 +14,9 @@ app.use(express.urlencoded({ extended: true }))
 
 //db initilization
 ensureDbExists()
-  .then(() => {
-    AppDataSource.initialize()
-      .then(() => {
-        console.log("Database connected")
-      })
-      .catch(error => console.log(error))
-  })
+  .then(() => AppDataSource.initialize())
+  .then(() => console.log("Database connected"))
+  .catch(error => console.log("Database error:", error));
 
 
 // Routes

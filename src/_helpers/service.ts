@@ -17,10 +17,9 @@ const create = async (params: UserType) => {
     if (await userRepository.findOne({ where: { email: params.email } })) {
         throw 'Email "' + params.email + '" is already taken';
     }
-
-    const newUser = userRepository.create({ lastName: params.lastName, firstName: params.firstName, role: params.role, title: params.title });
-    await userRepository.save(newUser);
-}
+    const user = userRepository.create(params); // Include all fields
+    await userRepository.save(user);
+};
 
 
 const _delete = async (id: number) => {

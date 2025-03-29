@@ -1,28 +1,25 @@
-//This is for the creation User()
-import { User } from "../entities/User";
-import { Request, Response, NextFunction, Router } from "express"
-import { userService } from "../_helpers/service"
-export const userRouter = Router()
+import { Router } from "express";
+import { userService } from "../_helpers/service";
 
-//get all users
-userRouter.get('/users', async (req: Request, res: Response, next: NextFunction) => {
+export const userRouter = Router();
+
+// GET /api/users
+userRouter.get('/', async (req, res, next) => {
     userService.getAll()
         .then(users => res.json(users))
-        .catch(next)
+        .catch(next);
 });
 
-userRouter.post("/users", async (req: Request, res: Response, next: NextFunction) => {
+// POST /api/users
+userRouter.post('/', async (req, res, next) => {
     userService.create(req.body)
         .then(() => res.json({ message: "User created" }))
-        .catch(next)
+        .catch(next);
 });
 
-
-
-//deletion
-userRouter.delete('/users/:id', async (req: Request, res: Response, next: NextFunction) => {
-    userService.delete(req.params.id as unknown as number)
+// DELETE /api/users/:id
+userRouter.delete('/:id', async (req, res, next) => {
+    userService.delete(Number(req.params.id))
         .then(() => res.json({ message: "User deleted" }))
-        .catch(next)
+        .catch(next);
 });
-
