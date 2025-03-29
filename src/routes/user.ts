@@ -17,6 +17,21 @@ userRouter.post('/', async (req, res, next) => {
         .catch(next);
 });
 
+
+// GET /api/users/:id
+userRouter.get('/:id', async (req, res, next) => {
+    userService.getById(req.params.id as unknown as number)
+        .then(users => res.json(users))
+        .catch(next)
+})
+
+// PUT /api/users/:id
+userRouter.put('/:id', async (req, res, next) => {
+    userService.update(req.params.id as unknown as number, req.body)
+        .then(() => res.json({ message: "User updated" }))
+        .catch(next)
+});
+
 // DELETE /api/users/:id
 userRouter.delete('/:id', async (req, res, next) => {
     userService.delete(Number(req.params.id))
