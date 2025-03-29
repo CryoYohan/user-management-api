@@ -1,6 +1,9 @@
- // GROUP C
- Leader: YPIL, Cyril John T.
- Members:
-    Doblas, Ken Harvey
-    Montemar, Jherick Isaiah
-    Wenceslao, Kent
+# Group Project: REST API for User Management
+ ## Leader: Ypil, Cyril John T.
+ ## Members:
+ <ul>
+  <li>Doblas, Ken Harvey</li>
+  <li>Montemar, Jherick Isaiah</li>
+  <li>Wenceslao, Kent</li>
+ </ul>
+
