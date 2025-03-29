@@ -1,7 +1,6 @@
 //This is for the creation User()
 import { User } from "../entities/User";
 import { Request, Response, NextFunction, Router } from "express"
-import Joi from "joi"
 import { userService } from "../_helpers/service"
 export const userRouter = Router()
 

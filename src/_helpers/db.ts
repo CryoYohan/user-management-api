@@ -1,27 +1,26 @@
-import "reflect-metadata"
-import { DataSource } from "typeorm"
-import { User } from "../entities/User"
-import { createConnection } from "mysql2/promise"
+import "reflect-metadata";
+import { DataSource } from "typeorm";
+import * as mysql from "mysql2/promise";
+import * as fs from "fs";
+import * as path from "path";
+
+// Load configuration from ormconfig.json
+const ormConfigPath = path.join(__dirname, "../../ormconfig.json");
+const rawConfig = fs.readFileSync(ormConfigPath, "utf8");
+const ormConfig = JSON.parse(rawConfig);
+
+export const AppDataSource = new DataSource(ormConfig);
 
 export const ensureDbExists = async () => {
-    const connection = await createConnection({
-        host: "localhost",
-        port: 3306,
-        user: "root",
-        password: "",
-    })
-    await connection.query("CREATE DATABASE IF NOT EXISTS `user-management-api-db`")
-}
-export const AppDataSource = new DataSource({
-    type: "mysql",
-    host: "localhost",
-    port: 3306,
-    username: "root",
-    password: "",
-    database: "user-management-api-db",
-    synchronize: true,
-    logging: false,
-    entities: [User],
-    migrations: [],
-    subscribers: [],
-})
+    const connection = await mysql.createConnection({
+        host: ormConfig.host,
+        port: ormConfig.port,
+        user: ormConfig.username,
+        password: ormConfig.password,
+    });
+
+    await connection.query(
+        `CREATE DATABASE IF NOT EXISTS \`${ormConfig.database}\`;`
+    );
+    await connection.end();
+};
